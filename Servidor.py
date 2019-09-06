@@ -1,26 +1,26 @@
 import socket
+import sys
+
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Bind the socket to the port
+server_address = ('0.0.0.0', 5000)
+print(sys.stderr, 'starting up on %s port %s' % server_address)
+sock.bind(server_address)
+
+while True:
+    print(sys.stderr, '\nwaiting to receive message')
+    data, address = sock.recvfrom(1024)
+
+    print((sys.stderr, 'received %s bytes from %s' % (len(data), address)))
 
 
-def Main():
-    host = "0.0.0.0"
-    porta = 5000
-
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((host, porta))
-
-    print("Servidor foi iniciado com sucesso")
-
-    while True:
-        dados, endereco =  sock.recvfrom(1024)
-        print ("message from" + str(endereco))
-        print("from connected user: " + str(dados.decode("utf-8")))
-        dados = str(dados).upper()
-        dados_as_bytes =  str.encode(dados)
-        sock.sendto(dados_as_bytes, endereco)
-    sock.close()
-
-if __name__ == '__main__':
-    Main()
 
 
+    print(sys.stderr, data)
+
+    if data:
+        sent = sock.sendto(data, address)
+        print( sys.stderr, 'sent %s bytes back to %s' % (sent, address))
 
