@@ -1,7 +1,5 @@
 import socket
 
-from pip._vendor.distlib.compat import raw_input
-
 
 def Main():
     host = "localhost"
