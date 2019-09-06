@@ -17,7 +17,7 @@ def Main():
         print ("message from" + str(endereco))
         print("from connected user: " + str(dados.decode("utf-8")))
         dados = str(dados).upper()
-        pro_cliente = raw_input("-> ")
+        pro_cliente = input("-> ")
         dados_as_bytes =  str.encode(pro_cliente)
         sock.sendto(dados_as_bytes, endereco)
     sock.close()
