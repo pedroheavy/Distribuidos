@@ -1,23 +1,24 @@
 import socket
+import sys
 
+# Create a UDP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-def Main():
-    host = "127.0.0.1"
-    porta = 5001
+server_address = ('192.168.100.23', 5000)
+message = 'This is the message.  It will be repeated.'
+message_asbyte = str.encode(message)
 
-    servidor = ('127.0.0.1', 5000)
+try:
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((host, porta))
+    # Send data
+    print(sys.stderr, 'sending "%s"' % message)
+    sent = sock.sendto(message_asbyte, server_address)
 
-    mensagem = input("-> ")
-    while mensagem != 'sair':
-        mensagem_as_byte = str.encode(mensagem)
-        sock.sendto(mensagem_as_byte, servidor)
-        data, addr = sock.recvfrom(1024)
-        print("Received from server: '" + str(data.decode("utf-8")) + "'")
-        mensagem = input("-> ")
+    # Receive response
+    print (sys.stderr, 'waiting to receive')
+    data, server = sock.recvfrom(1024)
+    print (sys.stderr, 'received "%s"' % data)
+
+finally:
+    print (sys.stderr, 'closing socket')
     sock.close()
-if __name__ == '__main__':
-    Main()
-
