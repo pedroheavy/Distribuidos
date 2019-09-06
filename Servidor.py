@@ -1,5 +1,5 @@
 import socket
-HOST = '0.0.0.0'              # Endereco IP do Servidor
+HOST = '13.92.227.210'              # Endereco IP do Servidor
 PORT = 5000            # Porta que o Servidor esta
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 orig = (HOST, PORT)
