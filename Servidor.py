@@ -7,7 +7,7 @@ socket.bind(("", 9999))
 while 1:
 
     # pega os dados recebidos com buffer
-    data, ip = socket.recvfrom(1024)
+    data, ip = socket.recvfrom(2048)
 
     # envia mensagem de volta
     envia_deVolta = socket.sendto(data, ip)
