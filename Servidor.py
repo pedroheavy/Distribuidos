@@ -2,7 +2,7 @@ import socket
 
 
 def Main():
-    host = "localhost"
+    host = "127.0.0.1"
     porta = 5000
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
