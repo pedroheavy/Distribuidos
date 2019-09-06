@@ -1,26 +1,10 @@
 import socket
-import sys
-
-# Create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-# Bind the socket to the port
-server_address = ('0.0.0.0', 5000)
-print(sys.stderr, 'starting up on %s port %s' % server_address)
-sock.bind(server_address)
-
+HOST = ''              # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+orig = (HOST, PORT)
+udp.bind(orig)
 while True:
-    print(sys.stderr, '\nwaiting to receive message')
-    data, address = sock.recvfrom(1024)
-
-    print((sys.stderr, 'received %s bytes from %s' % (len(data), address)))
-
-
-
-
-    print(sys.stderr, data)
-
-    if data:
-        sent = sock.sendto(data, address)
-        print( sys.stderr, 'sent %s bytes back to %s' % (sent, address))
-
+    msg, cliente = udp.recvfrom(1024)
+    print( cliente, msg)
+udp.close()
