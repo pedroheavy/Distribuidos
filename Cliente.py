@@ -1,26 +1,27 @@
 import socket
 
-# create our udp socket
+#Cria o socket udp
 try:
     socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 except socket.error:
-    print("Oops, something went wrong connecting the socket")
+    print("Algo deu errado ao conectar ao socket")
     exit()
 
 while 1:
     message = input("> ")
-
-    # encode the message
+    if message == 'sair':
+        break
+    # passa pra byte
     message = message.encode()
 
     try:
-        # send the message
-        socket.sendto(message, ("192.168.100.23", 9999))
+        # envia a mensagem
+        socket.sendto(message, ("3.92.227.210", 9999))
 
-        # output the response (if any)
+        # pega a resposta do servidor
         data, ip = socket.recvfrom(1024)
-
-        print("{}: {}".format(ip, data.decode()))
+        mensagem_recebida = data.decode("utf-8")
+        print("A mensagem enviada foi: " + mensagem_recebida)
 
     except socket.error:
         print("Error! {}".format(socket.error))
